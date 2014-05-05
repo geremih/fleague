@@ -7,15 +7,29 @@
     = link_to "Logout", destroy_user_session_path, method: :delete
 
 
-%ul
-  %li
-    "Mihir"
-  - for player in @players
-    %li
-      Name:
-      = player.name
-      Score:
-      = player.score
-
+.row
+  .player-lists
+    %h2 Choose your best players
+    .span6
+      %ul.user-team-list
+        %li Item 1
+        %li Item 2
+    .span6
+      %ul.all-players-list
+        - for player in @players
+          %li
+            Name:
+            = player.name
+            Score:
+            = player.score
         
-  
+
+
+
+
+
+
+
+
+
+    
