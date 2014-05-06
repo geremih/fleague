@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'team/destroy'
 
+  resources :team
   devise_for :users
   resources :users do
     resources :team

@@ -7,6 +7,27 @@
     = csrf_meta_tags
 
   %body
+    - if user_signed_in?
+      .navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+        .container-fluid
+          .navbar-header
+            %a.navbar-brand{href:"/accounts/dashboard"}
+              Fantasy Premier League
+          .navbar-collapse.collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                %a{href:{}}
+                  = current_user.email
+              - if can? :update, Player
+                %li
+                  %a{href:{}}
+                  = link_to "Dashboard" , 
+              %li
+                = link_to "Logout", destroy_user_session_path, method: :delete
+              %li
+                %a{href:{}}
+                  = current_user.role
+
     - if notice 
       %p{:class => "alert alert-success"}
         = notice
