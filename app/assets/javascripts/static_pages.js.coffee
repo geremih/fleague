@@ -11,7 +11,6 @@ $ ->
 
         $('.connected').sortable connectWith: '.connected'
         #$('#update-team-button').click((e)-> populateTeamField(e))
-
         populateTeamField = (e)->
                 team = []
                 $('.user-team-list li').each((index , element)->

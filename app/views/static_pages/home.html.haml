@@ -1,38 +1,37 @@
-%h2 Welcome to Fantasy League
-
-- if user_signed_in? 
-  Logged in as
-  %strong
-    = current_user.email
-    = link_to "Logout", destroy_user_session_path, method: :delete
-
-
-.row
-  .player-lists
-    %h2 Choose your best players
-    .span6.user-team-container
-      %ul.user-team-list.connected
+.navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+  .container-fluid
+    .navbar-header
+      %a.navbar-brand{href:"/accounts/dashboard"}
+        Fantasy Premier League
+    .navbar-collapse.collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a{href:{}}
+            G= current_user.email
+        %li
+          %a{href:{}}
+          
+.container-fluid
+  .row
+    .span6
+      %ul.list-group.connected.user-team-list
         - for player in @user_players
-          %li{data: {player: {id: player.id}}}
-            Name:
+          %li.list-group-item{data: {player: {id: player.id}}}
             = player.name
-            Score:
-            = player.score.round(2)
-    .span6.all-players-container
-      %ul.all-players-list.connected
+            %span.badge
+              = player.score.round(2)
+    .span6
+      %ul.list-group.connected
         - for player in @remaining_players
-          %li{data: {player: {id: player.id}}}
-            Name:
+          %li.list-group-item{data: {player: {id: player.id}}}
             = player.name
-            Score:
-            = player.score.round(2)
+            %span.badge
+              = player.score.round(2)
 
 
-= form_tag(user_team_index_path(:user_id  => current_user.id) , :id => "form") do
-  = hidden_field_tag(:team, "" , id:"team") 
-  = submit_tag("Update team"  , id:"update-team-button")
+  = form_tag(user_team_index_path(:user_id  => current_user.id) , :id => "form") do
+    = hidden_field_tag(:team, "" , id:"team") 
+    = submit_tag("Update team"  , id:"update-team-button")
 
 
 
-
-    
