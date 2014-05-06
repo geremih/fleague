@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
+  get 'team/create'
+
+  get 'team/new'
+
+  get 'team/edit'
+
+  get 'team/show'
+
+  get 'team/update'
+
+  get 'team/destroy'
+
   devise_for :users
+  resources :users do
+    resources :team
+  end
   get "static_pages/home"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

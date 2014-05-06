@@ -10,24 +10,23 @@
 .row
   .player-lists
     %h2 Choose your best players
-    .span6
+    .span6.user-team-container
       %ul.user-team-list.connected
-        %li Item 1
-        %li Item 2
-    .span6
+        %li{data: {player: {id: -1}}} Item 1
+        %li{data: {player: {id: -2}}} Item 2
+    .span6.all-players-container
       %ul.all-players-list.connected
         - for player in @players
-          %li
+          %li{data: {player: {id: player.id}}}
             Name:
             = player.name
             Score:
             = player.score
-        
 
 
-
-
-
+= form_tag(user_team_index_path(:user_id  => current_user.id) , :id => "form") do
+  = hidden_field_tag(:team, "" , id:"team") 
+  = submit_tag("Update team"  , id:"update-team-button")
 
 
 

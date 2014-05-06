@@ -3,7 +3,27 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
         
-$ ->  $('.connected').sortable connectWith: '.connected'
 
+$ ->
+        update_team = -> $('.user-team-list li').each(
+                (index , element)->
+                        console.log($(element).attr("data-player-id")))
+
+        $('.connected').sortable connectWith: '.connected'
+        #$('#update-team-button').click((e)-> populateTeamField(e))
+
+        populateTeamField = (e)->
+                team = []
+                $('.user-team-list li').each((index , element)->
+                        console.log($(element).attr("data-player-id"))
+                        team.push $(element).attr("data-player-id"))
+                $("#team").val(team)
+                #alert(team)
+                return true;
+        $("#form").submit ->
+                populateTeamField()
+                
+        
+        
 
 
