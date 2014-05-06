@@ -11,11 +11,11 @@
   .player-lists
     %h2 Choose your best players
     .span6
-      %ul.user-team-list
+      %ul.user-team-list.connected
         %li Item 1
         %li Item 2
     .span6
-      %ul.all-players-list
+      %ul.all-players-list.connected
         - for player in @players
           %li
             Name:
