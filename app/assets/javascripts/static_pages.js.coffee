@@ -9,9 +9,16 @@ $ ->
                 (index , element)->
                         console.log($(element).attr("data-player-id")))
 
-        $('.connected').sortable connectWith: '.connected'
-        #$('#update-team-button').click((e)-> populateTeamField(e))
+        $('.connected').sortable
+                item: '.list-group-item'
+                connectWith: '.connected'
+                change: (event , ui) -> alert("fdsa")
+
+        $('.connected').sortable 
         populateTeamField = (e)->
+                if  $('.user-team-list li').length != 11
+                        alert "Choose 11 players"
+                        return false;
                 team = []
                 $('.user-team-list li').each((index , element)->
                         console.log($(element).attr("data-player-id"))
@@ -20,15 +27,13 @@ $ ->
                 #alert(team)
                 return true;
 
-
-
+        $("#random-button").click( -> randomScore())
         randomScore = ->
                 $('.player-score-input').each (index, element) ->
                         $(element).val( Math.floor( 100 * Math.random()))
         $("#form").submit ->
                 populateTeamField()
                 
-        $("#random-button").click( -> randomScore())
 
         sortPlayers = ->
                 if $("#sort-button").hasClass("up")

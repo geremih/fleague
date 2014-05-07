@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+
+  post 'match/create'
+  get 'match/schedule'
   get 'user/matchup'
 
   get 'static_pages/dashboard'
