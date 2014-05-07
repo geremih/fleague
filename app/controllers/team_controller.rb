@@ -1,4 +1,6 @@
 class TeamController < ApplicationController
+
+  before_action :authenticate_user!
   def create
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
     #TODO: Check team length
@@ -16,6 +18,12 @@ class TeamController < ApplicationController
   end
 
   def new
+    if current_user.team
+      @user_players = current_user.team.player
+    else
+      @user_players = []
+    end
+    @remaining_players = Player.all  - @user_players
   end
 
   def edit

@@ -1,7 +1,7 @@
 class MatchController < ApplicationController
   
   def schedule
-    @remaining_players = Player.all
+
   end
 
   def create
@@ -13,5 +13,16 @@ class MatchController < ApplicationController
     player_ids.each { |id|  match.player << Player.find(id) }
     match.save
   end
+
+  def new
+
+    @remaining_players = Player.all
+  end
+
+  def update
+    @players = Player.all
+  end
+  
+  
 
 end

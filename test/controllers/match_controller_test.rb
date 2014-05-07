@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class MatchControllerTest < ActionController::TestCase
-  test "should get create" do
-    get :create
+  test "should get update" do
+    get :update
     assert_response :success
   end
 

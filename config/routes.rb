@@ -1,24 +1,22 @@
 Rails.application.routes.draw do
 
-
-  post 'match/create'
-  get 'match/schedule'
-  get 'user/matchup'
-
-  get 'static_pages/dashboard'
+  get "static_pages/home"
+  get 'dashboard' => 'match#update'
+  get 'dashboard/schedule' => 'match#new', as: :match_schedule
+  resources :match
   resources :team
   devise_for :users
   resources :users do
     resources :team
   end
-  get "static_pages/home"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
 
   #TODO: Hacky way for now, fix later
-  root "static_pages#home"
+  root "team#new"
 
 
   
