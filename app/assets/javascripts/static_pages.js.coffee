@@ -31,16 +31,21 @@ $ ->
         $("#random-button").click( -> randomScore())
 
         sortPlayers = ->
-                alert "Sorting"
+                if $("#sort-button").hasClass("up")
+                        up = true
+                $('#sort-button').toggleClass("up")
                 mylist = $('.remaining-players-list')
                 listitems = mylist.children('li').get()
-                console.log(listitems)
                 listitems.sort (a , b) ->
-                        parseFloat($(b).children('span').text()) - parseFloat($(a).children('span').text())
-                console.log(listitems)
+                        if up
+                                parseFloat($(a).children('span').text()) - parseFloat($(b).children('span').text())
+                        else
+                                parseFloat($(b).children('span').text()) - parseFloat($(a).children('span').text())
+                                
                 $.each listitems, (idx, itm) ->
                         mylist.append(itm)
                                 
         $('#sort-button').click( -> sortPlayers())
-
+        $('.remaining-players-list').slimScroll height: '400px'
+  
 
