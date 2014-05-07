@@ -1,0 +1,7 @@
+Make admin dashboard to update player scores
+Add scores to users
+Add prices to players
+Limit players taken by prices
+Add more realistic players and details
+
+Make sign -in page look better
