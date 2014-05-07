@@ -1,18 +1,7 @@
 Rails.application.routes.draw do
+  get 'user/matchup'
+
   get 'static_pages/dashboard'
-
-  get 'team/create'
-
-  get 'team/new'
-
-  get 'team/edit'
-
-  get 'team/show'
-
-  get 'team/update'
-
-  get 'team/destroy'
-
   resources :team
   devise_for :users
   resources :users do

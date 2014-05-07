@@ -1,6 +1,5 @@
 class TeamController < ApplicationController
   def create
-
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
     #TODO: Check team length
     #TODO: Check correct format of the input
@@ -14,7 +13,6 @@ class TeamController < ApplicationController
     team = user.create_team
     player_ids.each { |id|  team.player << Player.find(id) }
     user.save
-
   end
 
   def new
@@ -31,4 +29,11 @@ class TeamController < ApplicationController
 
   def destroy
   end
+  
+  def matchup
+    
+  end
+
+
+  
 end

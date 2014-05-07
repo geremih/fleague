@@ -10,6 +10,7 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
+    @players = Player.all
   end
   
 end

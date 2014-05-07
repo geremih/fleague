@@ -1,2 +1,31 @@
-%h1 StaticPages#dashboard
-%p Find me in app/views/static_pages/dashboard.html.haml
+.container-fluid
+  .row
+    .col-lg-2.sidebar
+      %ul.nav.nav-sidebar
+        %li.active
+          %a{href:"#"}
+            Match up!
+        %li
+          %a{href:"#"}
+            Update player details
+        %li
+          %a{href:"#"}    
+            User Details  
+    .col-lg-10.col-lg-offset-2 
+      = form_tag '/team/matchup', :id => "matchup-form" do
+        .row
+          .col-lg-2
+            %h1  Match up!        
+          .col-lg-1.col-lg-offset-4
+            = submit_tag("Matchup!" , class: "btn btn-default btn-primary btn-lg" )
+          .col-lg-1
+            %button.btn.btn-lg.btn-primary#random-button{type: "button"}
+              Random
+        .row
+          .col-lg-offset-2.col-lg-6
+            %ul.list-group
+              - for player in @players
+                %li.list-group-item
+                  = player.name
+                  = text_field_tag( player.id , nil, class: "player-score-input form-control")
+
