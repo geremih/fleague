@@ -6,9 +6,11 @@ class User < ActiveRecord::Base
   has_one :team
   Roles = [:admin , :default]
 
-  def init
+  before_save :default_values
+  def default_values
     self.role ||= :default
   end
+
   def is?( requested_role)
     self.role  == requested_role.to_s
   end
