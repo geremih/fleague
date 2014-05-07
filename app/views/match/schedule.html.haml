@@ -1,11 +1,12 @@
 
 
 .container-fluid
+  %h3 Schedule match
   .row
-    .col-lg-offset-11.col-lg-1
+    .col-lg-offset-10.col-lg-1
       = form_tag(match_create_path , :id => "match-schedule-form") do
         = hidden_field_tag(:team, "" , id:"match-schedule-team") 
-        = submit_tag("Select team"  , id:"match-schedule-select-team-button" , class: "btn btn-default btn-primary btn-lg")
+        = submit_tag("Schedule match"  , id:"match-schedule-select-team-button" , class: "btn btn-default btn-primary btn-lg")
 
   .row
     .col-lg-6
