@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class MatchControllerTest < ActionController::TestCase
-  test "should get update" do
-    get :update
+  test "should get index" do
+    get :index
     assert_response :success
   end
 

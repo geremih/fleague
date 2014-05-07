@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  get "static_pages/home"
-  get 'dashboard' => 'match#update'
+  get 'dashboard' => 'match#index'
   get 'dashboard/schedule' => 'match#new', as: :match_schedule
   resources :match
   resources :team

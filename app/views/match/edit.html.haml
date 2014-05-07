@@ -1,9 +1,11 @@
+
+
 .container-fluid
   .row
     .col-lg-2.sidebar
       %ul.nav.nav-sidebar
         %li.active
-          %a{href:"#"}
+          %a{href: match_index_path}
             Match up!
         %li
           %a{href:"#"}
@@ -12,10 +14,10 @@
           %a{href:"#"}    
             User Details  
         %li
-          %a{href:"/match/schedule"}    
+          %a{href: match_schedule_path}    
             Schedule Match
     .col-lg-10.col-lg-offset-2 
-      = form_tag '/team/matchup', :id => "matchup-form" do
+      = form_tag match_path(@match),  method: :put , :id => "matchup-form" do
         .row
           .col-lg-2
             %h1  Match up!        
@@ -31,4 +33,5 @@
                 %li.list-group-item
                   = player.name
                   = text_field_tag( player.id , nil, class: "player-score-input form-control")
+
 
