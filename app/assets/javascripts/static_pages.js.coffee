@@ -19,10 +19,28 @@ $ ->
                 $("#team").val(team)
                 #alert(team)
                 return true;
+
+
+
+        randomScore = ->
+                $('.player-score-input').each (index, element) ->
+                        $(element).val( Math.floor( 100 * Math.random()))
         $("#form").submit ->
                 populateTeamField()
                 
-        
-        
+        $("#random-button").click( -> randomScore())
+
+        sortPlayers = ->
+                alert "Sorting"
+                mylist = $('.remaining-players-list')
+                listitems = mylist.children('li').get()
+                console.log(listitems)
+                listitems.sort (a , b) ->
+                        parseFloat($(b).children('span').text()) - parseFloat($(a).children('span').text())
+                console.log(listitems)
+                $.each listitems, (idx, itm) ->
+                        mylist.append(itm)
+                                
+        $('#sort-button').click( -> sortPlayers())
 
 

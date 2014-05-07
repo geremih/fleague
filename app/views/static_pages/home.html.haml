@@ -17,7 +17,10 @@
               = player.score.round(2)
     .col-lg-6
       %h3 Available Players
-      %ul.list-group.connected
+      %button.btn#sort-button{type: "button"}
+        Sort
+
+      %ul.list-group.connected.remaining-players-list
         - for player in @remaining_players
           %li.list-group-item{data: {player: {id: player.id}}}
             = player.name
