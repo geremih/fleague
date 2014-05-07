@@ -18,7 +18,7 @@
         %button.btn#match-schedule-sort-button{type: "button"}
           Sort
 
-      %ul.list-group.match-schedule-connected.match-schedule-remaining-players-list
+      %ul.list-group.match-schedule-connected1.match-schedule-remaining-players-list
         - for player in @remaining_players
           %li.list-group-item{data: {player: {id: player.id}}}
             = player.name

@@ -1,5 +1,6 @@
 class Team < ActiveRecord::Base
-  has_and_belongs_to_many :player
+  has_many :player_team_records
+  has_many :players , through: :player_team_records
   belongs_to :user
   
 end

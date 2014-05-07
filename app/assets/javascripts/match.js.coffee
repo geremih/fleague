@@ -12,9 +12,16 @@
                                 console.log($(element).attr("data-player-id")))
 
                 $('.match-schedule-connected').sortable
-                        item: '.list-group-item'
-                        connectWith: '.connected'
+                        connectWith: '.match-schedule-connected1'
                         change: (event , ui) -> alert("fdsa")
+
+                $('.match-schedule-connected1').sortable
+                        connectWith: '.match-schedule-connected1'
+                        change: (event , ui) -> alert("fdsa")
+                $( ".match-schedule-connected1" ).on "sortchange",( event, ui ) ->
+                        alert "Hello"
+                $( ".match-schedule-connected" ).on "sortchange",( event, ui ) ->
+                        alert "Hello"
 
 
                 populateTeamField = (e)->
