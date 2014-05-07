@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 %html
   %head
     %title Fantasy League
@@ -11,7 +10,7 @@
       .navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
         .container-fluid
           .navbar-header
-            %a.navbar-brand{href:"/accounts/dashboard"}
+            %a.navbar-brand{href:"/static_pages/home"}
               Fantasy Premier League
           .navbar-collapse.collapse
             %ul.nav.navbar-nav.navbar-right
@@ -20,8 +19,7 @@
                   = current_user.email
               - if can? :update, Player
                 %li
-                  %a{href:{}}
-                  = link_to "Dashboard" , 
+                  = link_to "Dashboard" , '/static_pages/dashboard'
               %li
                 = link_to "Logout", destroy_user_session_path, method: :delete
               %li

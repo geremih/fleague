@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_pages/dashboard'
+
   get 'team/create'
 
   get 'team/new'

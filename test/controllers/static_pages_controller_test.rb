@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class StaticPagesControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should get dashboard" do
+    get :dashboard
+    assert_response :success
+  end
+
 end
