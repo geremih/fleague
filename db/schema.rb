@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140507082340) do
   end
 
   create_table "matches_players", id: false, force: true do |t|
-    t.integer "team_id"
+    t.integer "match_id"
     t.integer "player_id"
   end
 
