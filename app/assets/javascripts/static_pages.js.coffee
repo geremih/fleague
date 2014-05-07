@@ -46,6 +46,6 @@ $ ->
                         mylist.append(itm)
                                 
         $('#sort-button').click( -> sortPlayers())
-        $('.remaining-players-list').slimScroll height: '400px'
+        $('.remaining-players-list').slimScroll height: '500px'
   
 
