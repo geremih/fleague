@@ -5,25 +5,38 @@ class TeamController < ApplicationController
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
     #TODO: Check team length
     #TODO: Check correct format of the input
-    user =User.find(params[:user_id])
+    user =User.find(current_user.id)
     authorize! :create, Team
-    if user.team
-      user.team.destroy
+    if user.team_for_match params[:match_id]
+      user.team_for_match(params[:match_id]).destroy
     end
-    team = Team.new( user_id: params[:user_id])
+    team = Team.new( user_id: params[:user_id] , match_id: params[:match_id])
     authorize! :create, team
-    team = user.create_team
+    team = user.teams.create
     player_ids.each { |id|  team.players << Player.find(id) }
-    user.save
+    team.match_id = params[:match_id].to_i
+    team.save
+    if not user.save
+      flash[:notice] = "Failed"
+    end
   end
 
   def new
-    if current_user.team
-      @user_players = current_user.team.players
+    @match_id = params[:match_id]
+    if not @match_id and Match.latest_match.id
+      redirect_to new_match_team_path(Match.latest_match.id)
+      return
+    end
+    @match_id = @match_id.to_i
+    @match = Match.find(@match_id)
+    @team = current_user.team_for_match @match_id
+    if @team
+      @user_players = Array(@team.players)
     else
       @user_players = []
     end
-    @remaining_players = Player.all  - @user_players
+
+    @remaining_players = @match.players - @user_players
   end
 
   def edit

@@ -23,13 +23,17 @@ class MatchController < ApplicationController
   end
   
   def update
-    match_id = params[:id]
+    match = Match.find(params[:id])
     @scores = []
-    for player in  Match.find(match_id).players
-      PlayerTeamRecord.find_by()
-      player.score = params[player.id.to_s].to_i
-      @scores << player.score
+    @records = []
+    for player in  match.players
+      record = PlayerMatchRecord.find_by match_id: match.id ,  player_id: player.id
+      record.score = params[player.id.to_s].to_i
+      record.save
+      @records << record
     end
+    match.completed = true
+    match.save
     
   end
   

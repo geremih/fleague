@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507133328) do
+ActiveRecord::Schema.define(version: 20140508054523) do
 
   create_table "matches", force: true do |t|
     t.boolean  "completed"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20140507133328) do
 
   create_table "players", force: true do |t|
     t.string   "name"
-    t.float    "score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140507133328) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "match_id"
   end
 
   add_index "teams", ["user_id"], name: "index_teams_on_user_id"
@@ -64,13 +64,11 @@ ActiveRecord::Schema.define(version: 20140507133328) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
     t.string   "role"
     t.float    "score"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["team_id"], name: "index_users_on_team_id"
 
 end
