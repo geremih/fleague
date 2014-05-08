@@ -17,4 +17,13 @@ class Player < ActiveRecord::Base
       end
     end
   end
+
+  def score_in_match match_id
+    if Match.find(match_id).completed
+      PlayerMatchRecord.where( player_id: self.id , match_id: match_id).first.score
+    else
+      0
+    end
+
+  end
 end

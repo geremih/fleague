@@ -14,6 +14,26 @@
               Fantasy Premier League
           .navbar-collapse.collapse
             %ul.nav.navbar-nav.navbar-right
+              %li.dropdown
+                %a.dropdown-toggle{href:'#' , data:{toggle: "dropdown"} , role: "menu"} Completed
+                %ul.dropdown-menu
+                  - for match in Match.all
+                    - if match.completed and current_user.teams.collect{ |t| t.match_id}.include? match.id
+                      %li
+                        %a{href: team_path(current_user.team_for_match_id match.id)}
+                          = match.id
+              %li.dropdown
+                %a.dropdown-toggle{href:'#' , data:{toggle: "dropdown"} , role: "menu"} Scheduled
+                %ul.dropdown-menu
+                  - for match in Match.all
+                    - if not match.completed
+                      %li
+                        %a{href: new_match_team_path(match) }
+                          = match.id
+
+              %li
+                %a{href:{}}
+                  = current_user.score
               %li
                 %a{href:{}}
                   = current_user.email

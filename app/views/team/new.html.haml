@@ -1,6 +1,8 @@
 .container-fluid
-
-  
+  .row
+    %h1
+      Team for Match
+      = params[:match_id]
   .row
     .col-lg-6
       %h3 Your Team
@@ -9,8 +11,6 @@
         Available Players
         %button.btn#sort-button{type: "button"}
           Sort
-
-
   .row
     .col-lg-6
       %ul.list-group.connected.user-team-list

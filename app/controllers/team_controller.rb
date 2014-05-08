@@ -7,8 +7,8 @@ class TeamController < ApplicationController
     #TODO: Check correct format of the input
     user =User.find(current_user.id)
     authorize! :create, Team
-    if user.team_for_match params[:match_id]
-      user.team_for_match(params[:match_id]).destroy
+    if user.team_for_match_id params[:match_id]
+      user.team_for_match_id(params[:match_id]).destroy
     end
     team = Team.new( user_id: params[:user_id] , match_id: params[:match_id])
     authorize! :create, team
@@ -22,14 +22,22 @@ class TeamController < ApplicationController
   end
 
   def new
+    
     @match_id = params[:match_id]
     if not @match_id and Match.latest_match.id
       redirect_to new_match_team_path(Match.latest_match.id)
       return
     end
+
+
     @match_id = @match_id.to_i
     @match = Match.find(@match_id)
-    @team = current_user.team_for_match @match_id
+
+    if @match.completed
+      redirect_to team_path(current_user.team_for_match_id @match_id)
+      return
+    end
+    @team = current_user.team_for_match_id @match_id
     if @team
       @user_players = Array(@team.players)
     else
@@ -43,6 +51,7 @@ class TeamController < ApplicationController
   end
 
   def show
+    @team = Team.find(params[:id])
   end
 
   def update

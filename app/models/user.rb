@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
   end
 
   def score
-    self.team.inject(0) { |acc, t| acc + t.score}
+    self.teams.inject(0) { |acc, t| acc + t.score}
   end
 
-  def team_for_match( match_id)
+  def team_for_match_id( match_id)
     self.teams.select { |t| t.match_id == match_id}.first
   end
     
