@@ -13,13 +13,13 @@ class TeamController < ApplicationController
     team = Team.new( user_id: params[:user_id])
     authorize! :create, team
     team = user.create_team
-    player_ids.each { |id|  team.player << Player.find(id) }
+    player_ids.each { |id|  team.players << Player.find(id) }
     user.save
   end
 
   def new
     if current_user.team
-      @user_players = current_user.team.player
+      @user_players = current_user.team.players
     else
       @user_players = []
     end
