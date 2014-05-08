@@ -1,29 +1,31 @@
 .container-fluid
   .row
-    %h1
-      Team for Match
+    %h1.text-center
+      Match
       = params[:match_id]
   .row
-    .col-lg-6
+    .col-lg-3.col-lg-offset-2
       %h3 Your Team
-    .col-lg-6
+    .col-lg-3.col-lg-offset-2
       %h3 
         Available Players
         %button.btn#sort-button{type: "button"}
           Sort
   .row
-    .col-lg-6
+    .col-lg-3.col-lg-offset-2
       %ul.list-group.connected.user-team-list
         - for player in @user_players
           %li.list-group-item{data: {player: {id: player.id}}}
             = player.name
             %span.badge
               = player.score.round(2)
+    .col-lg-2.text-center
       = form_tag(match_team_index_path(params[:match_id]) , :id => "form") do
         = hidden_field_tag(:team, "" , id:"team") 
         = submit_tag("Update team"  , id:"update-team-button" , class: "btn btn-default btn-primary btn-lg")
 
-    .col-lg-6
+      
+    .col-lg-3
       %ul.list-group.connected.remaining-players-list
         - for player in @remaining_players
           %li.list-group-item{data: {player: {id: player.id}}}

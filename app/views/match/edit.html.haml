@@ -3,17 +3,18 @@
     .col-lg-2.sidebar
       = render "shared/dashboard" , selection: :match_up
     .col-lg-10.col-lg-offset-2 
+      .row
+        %h1.text-center  Match up!        
+
       = form_tag match_path(@match),  method: :put , :id => "matchup-form" do
         .row
-          .col-lg-2
-            %h1  Match up!        
-          .col-lg-1.col-lg-offset-4
+          .col-lg-1.col-lg-offset-6
             = submit_tag("Matchup!" , class: "btn btn-default btn-primary btn-lg" )
           .col-lg-1
             %button.btn.btn-lg.btn-primary#random-button{type: "button"}
               Random
         .row
-          .col-lg-offset-2.col-lg-6
+          .col-lg-4.col-lg-offset-4
             %ul.list-group
               - for player in @players
                 %li.list-group-item

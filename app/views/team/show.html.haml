@@ -1,15 +1,20 @@
-%h2 
-  Match 
-  = @team.match_id
-  Completed
-%h3
-  Score
-  = @team.score
-%ul.list-group
-  - for player in @team.players
-    %li.list-group-item
-      = player.name
-      %span.badge
-        = player.score_in_match @team.match_id
+.container-fluid
+  .row
+    .col-lg-4.col-lg-offset-4
+      .row
+        %h2.text-center 
+          Match 
+          = @team.match_id
+          Statistics
+        %h5.pull-right
+          Score
+          = @team.score
+      .row
+        %ul.list-group
+          - for player in @team.players
+            %li.list-group-item
+              = player.name
+              %span.badge
+                = player.score_in_match @team.match_id
 
 

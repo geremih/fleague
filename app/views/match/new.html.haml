@@ -3,21 +3,27 @@
     .col-lg-2.sidebar
       = render "shared/dashboard" , selection: :schedule
     .col-lg-10.col-lg-offset-2
+      .row.text-center
+        %h1 Schedule Match
       .row
-        .col-lg-offset-10.col-lg-1
-          = form_tag(match_index_path , :id => "match-schedule-form") do
-            = hidden_field_tag(:team, "" , id:"match-schedule-team") 
-            = submit_tag("Schedule match"  , id:"match-schedule-select-team-button" , class: "btn btn-default btn-primary btn-lg")
-      .row
-        .col-lg-6
+        .col-lg-3.col-lg-offset-2
           %h3 Your Team
-          %ul.list-group.match-schedule-connected.match-schedule-select-team-list
-        .col-lg-6
+        .col-lg-3.col-lg-offset-2
           %h3 
             Available Players
             %button.btn#match-schedule-sort-button{type: "button"}
               Sort
 
+      .row
+        .col-lg-3.col-lg-offset-2
+
+          %ul.list-group.match-schedule-connected.match-schedule-select-team-list
+        .col-lg-2.text-center
+          = form_tag(match_index_path , :id => "match-schedule-form") do
+            = hidden_field_tag(:team, "" , id:"match-schedule-team") 
+            = submit_tag("Schedule match"  , id:"match-schedule-select-team-button" , class: "btn btn-default btn-primary btn-lg")
+        .col-lg-3
+          
           %ul.list-group.match-schedule-connected1.match-schedule-remaining-players-list
             - for player in @remaining_players
               %li.list-group-item{data: {player: {id: player.id}}}

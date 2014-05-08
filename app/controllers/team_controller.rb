@@ -1,6 +1,6 @@
 class TeamController < ApplicationController
-
   before_action :authenticate_user!
+
   def create
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
     #TODO: Check team length
@@ -10,7 +10,7 @@ class TeamController < ApplicationController
     if user.team_for_match_id params[:match_id]
       user.team_for_match_id(params[:match_id]).destroy
     end
-    team = Team.new( user_id: params[:user_id] , match_id: params[:match_id])
+    team = Team.new( user_id: current_user.id , match_id: params[:match_id])
     authorize! :create, team
     team = user.teams.create
     player_ids.each { |id|  team.players << Player.find(id) }
@@ -22,28 +22,28 @@ class TeamController < ApplicationController
   end
 
   def new
-    
-    @match_id = params[:match_id]
-    if not @match_id and Match.latest_match.id
-      redirect_to new_match_team_path(Match.latest_match.id)
-      return
+    match_id = params[:match_id]
+    if not match_id 
+      if Match.latest_match.id
+        redirect_to new_match_team_path(Match.latest_match.id)
+        return
+      else
+        render "Error"
+       return 
+      end
     end
-
-
-    @match_id = @match_id.to_i
-    @match = Match.find(@match_id)
-
+    match_id = match_id.to_i
+    @match = Match.find(match_id)
     if @match.completed
-      redirect_to team_path(current_user.team_for_match_id @match_id)
+      redirect_to team_path(current_user.team_for_match_id @match.id)
       return
     end
-    @team = current_user.team_for_match_id @match_id
-    if @team
-      @user_players = Array(@team.players)
+    team = current_user.team_for_match_id @match.id
+    if team
+      @user_players = Array(team.players)
     else
       @user_players = []
     end
-
     @remaining_players = @match.players - @user_players
   end
 
