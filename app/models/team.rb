@@ -3,7 +3,7 @@ class Team < ActiveRecord::Base
   has_many :players , through: :player_team_records
   belongs_to :user
   belongs_to :match
-  
+  validate :validate_team_size
   def score
     if not self.match_id
       return 0
@@ -15,6 +15,10 @@ class Team < ActiveRecord::Base
     else
       0
     end
+  end
+
+  def validate_team_size
+    errors.add(:player, "team not of 11 players") if not players.size ==11
   end
 end
 

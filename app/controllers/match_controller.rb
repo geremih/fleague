@@ -1,5 +1,5 @@
 class MatchController < ApplicationController
-  
+  before_action :authenticate_user!
 
   def create
     player_ids = params[:team].split(",").collect{ |s| s.to_i }

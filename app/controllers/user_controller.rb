@@ -1,7 +1,4 @@
 class UserController < ApplicationController
-
-  def update_team
-
-  end
+  before_action :authenticate_user!
   
 end
