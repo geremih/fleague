@@ -28,7 +28,7 @@ class TeamController < ApplicationController
         redirect_to new_match_team_path(Match.latest_match.id)
         return
       else
-        render "Error"
+        redirect_to pages_home_path
        return 
       end
     end
