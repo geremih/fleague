@@ -19,7 +19,21 @@ class TeamController < ApplicationController
     if not user.save
       flash[:notice] = "Failed"
     end
+
+    respond_to do |format|
+      if  team.errors.size == 0
+        format.html
+        format.js { render :json => {:status => :success}}
+      else
+        format.html
+        format.js { render :json => {:status => :error}}
+      end
+    end
   end
+
+
+    
+    
 
   def new
     match_id = params[:match_id]

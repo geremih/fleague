@@ -51,6 +51,17 @@ ready= ->
                                 
         $('#sort-button').click( -> sortPlayers())
         $('.remaining-players-list').slimScroll height: '462px'
+        $("#form").on "ajax:success", (e, data, status, xhr) ->
+                $("#alert-success").text("Updated")
+                $("#alert-success").show().delay(2000).fadeOut();
+        $("#form").on "ajax:error", (e ,data, status ,xhr) ->
+                $("#alert-danger").text("Error")
+                $("#alert-danger").show().delay(2000).fadeOut();
+        
+
+
+            
+        
   
 $(document).ready(ready)
 $(document).on('page:load', ready)

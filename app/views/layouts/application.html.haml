@@ -35,21 +35,17 @@
                 %a{href:{}}
                   = current_user.score
               %li
-                %a{href:{}}
+                %a{href: edit_user_registration_path}
                   = current_user.email
               - if can? :update, Player
                 %li
                   = link_to "Dashboard" , '/dashboard'
               %li
                 = link_to "Logout", destroy_user_session_path, method: :delete
-              %li
-                %a{href:{}}
-                  = current_user.role
-
+    %p{:class => "alert alert-success" , :id => "alert-success"}
     - if notice 
-      %p{:class => "alert alert-success"}
-        = notice
-    - if alert 
-      %p{:class=>"alert alert-danger"}
+      = notice
+    %p{:class=>"alert alert-danger" , :id => "alert-danger"}
+      - if alert 
         = alert
   = yield 
