@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'pages/home'
+
   get 'dashboard' => 'match#index'
   get 'dashboard/schedule' => 'match#new', as: :match_schedule
 
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   #TODO: Hacky way for now, fix later
-  root "team#new"
+  root "pages#home"
 
 
   
