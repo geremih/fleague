@@ -1,0 +1,9 @@
+
+
+%ul.nav.nav-sidebar
+  %li{class: [('active' if selection == :match_up)]}
+    %a{href: match_index_path}
+      Match up!
+  %li{class: [('active' if selection == :schedule)]}
+    %a{href: match_schedule_path}    
+      Schedule Match

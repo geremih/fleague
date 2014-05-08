@@ -1,10 +1,18 @@
 
-%ul
-  - i = 0
-  - for match in @matches
-    - i+= 1
-    %li
-      = link_to i , edit_match_path(match)
+.container-fluid
+  .row
+    .col-lg-2.sidebar
+      = render "shared/dashboard" , selection: :match_up
+    .col-lg-10.col-lg-offset-2 
+      %ul
+        - for match in @matches
+          %li
+            = link_to match.id , edit_match_path(match) 
+            - if match.completed
+              Completed
+            - else
+              Scheduled
+
 
       
 

@@ -1,21 +1,7 @@
-
-
 .container-fluid
   .row
     .col-lg-2.sidebar
-      %ul.nav.nav-sidebar
-        %li.active
-          %a{href: match_index_path}
-            Match up!
-        %li
-          %a{href:"#"}
-            Update player details
-        %li
-          %a{href:"#"}    
-            User Details  
-        %li
-          %a{href: match_schedule_path}    
-            Schedule Match
+      = render "shared/dashboard" , selection: :match_up
     .col-lg-10.col-lg-offset-2 
       = form_tag match_path(@match),  method: :put , :id => "matchup-form" do
         .row
