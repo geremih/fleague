@@ -3,8 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
         
-
-$ ->
+ready= ->
         update_team = -> $('.user-team-list li').each(
                 (index , element)->
                         console.log($(element).attr("data-player-id")))
@@ -51,5 +50,7 @@ $ ->
                         mylist.append(itm)
                                 
         $('#sort-button').click( -> sortPlayers())
-        $('.remaining-players-list').slimScroll height: '500px'
+        $('.remaining-players-list').slimScroll height: '462px'
   
+$(document).ready(ready)
+$(document).on('page:load', ready)
