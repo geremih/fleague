@@ -6,46 +6,34 @@
     = csrf_meta_tags
 
   %body
-    - if user_signed_in?
-      .navbar.navbar-inverse.navbar-default{role: "navigation"}
-        .container-fluid
-          .navbar-header
-            %a.navbar-brand{href:"/"}
-              Fantasy Premier League
-          .navbar-collapse.collapse
-            %ul.nav.navbar-nav.navbar-right
-              %li.dropdown
-                %a.dropdown-toggle{href:'#' , data:{toggle: "dropdown"} , role: "menu"} Completed
-                %ul.dropdown-menu
-                  - for match in Match.all
-                    - if match.completed and current_user.teams.collect{ |t| t.match_id}.include? match.id
-                      %li
-                        %a{href: team_path(current_user.team_for_match_id match.id)}
-                          = match.id
-              %li.dropdown
-                %a.dropdown-toggle{href:'#' , data:{toggle: "dropdown"} , role: "menu"} Scheduled
-                %ul.dropdown-menu
-                  - for match in Match.all
-                    - if not match.completed
-                      %li
-                        %a{href: new_match_team_path(match) }
-                          = match.id
-
-              %li
-                %a{href:{}}
-                  = current_user.score
-              %li
-                %a{href: edit_user_registration_path}
-                  = current_user.email
-              - if can? :update, Player
+    #wrap
+      - if user_signed_in?
+        .navbar.navbar-inverse.navbar-default{role: "navigation"}
+          .container-fluid
+            .navbar-header
+              %a.navbar-brand{href: root_path}
+                Fantasy Premier League
+            .navbar-collapse.collapse
+              %ul.nav.navbar-nav.navbar-right
                 %li
-                  = link_to "Dashboard" , '/dashboard'
-              %li
-                = link_to "Logout", destroy_user_session_path, method: :delete
-    %p{:class => "alert alert-success" , :id => "alert-success"}
-    - if notice 
-      = notice
-    %p{:class=>"alert alert-danger" , :id => "alert-danger"}
-      - if alert 
-        = alert
-  = yield 
+                  %a{href:{}}
+                    = current_user.score
+                %li
+                  %a{href: edit_user_registration_path}
+                    = current_user.email
+                - if can? :update, Player
+                  %li
+                    = link_to "Dashboard" , dashboard_path
+                %li
+                  = link_to "Logout", destroy_user_session_path, method: :delete
+      %p{:class => "alert alert-success" , :id => "alert-success"}
+        - if notice 
+          = notice
+      %p{:class=>"alert alert-danger" , :id => "alert-danger"}
+        - if alert 
+          = alert
+      = yield 
+      #push
+  .row#footer
+
+

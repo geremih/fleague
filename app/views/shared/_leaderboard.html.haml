@@ -1,0 +1,22 @@
+
+%h2 Leaderboard
+%table.table
+  %thead
+    %tr
+      %th Rank
+      %th Name
+      %th Score
+  %tbody
+    - users.each_index do |i|
+      %tr
+        %td= i+1
+        %td= users[i].email
+        %td= users[i].score
+      
+
+      
+    
+        
+    
+      
+
