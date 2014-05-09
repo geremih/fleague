@@ -7,18 +7,27 @@
         %h1.text-center  Match up!        
 
       = form_tag match_path(@match),  method: :put , :id => "matchup-form" do
+        .row.top-buffer
         .row
-          .col-lg-1.col-lg-offset-6
+          .col-lg-2.col-lg-offset-4.text-center
             = submit_tag("Matchup!" , class: "btn btn-default btn-primary btn-lg" )
-          .col-lg-1
+          .col-lg-2.text-center
             %button.btn.btn-lg.btn-primary#random-button{type: "button"}
               Random
+        .row.top-buffer
         .row
           .col-lg-4.col-lg-offset-4
-            %ul.list-group
-              - for player in @players
-                %li.list-group-item
-                  = player.name
-                  = text_field_tag( player.id , nil, class: "player-score-input form-control")
+            %table.table
+              %thead
+                %tr
+                  %th  Name
+                  %th Score
+              %tbody
+                - for player in @players
+                  %tr 
+                    %td
+                      = player.name
+                    %td
+                      = text_field_tag( player.id , nil, class: "player-score-input form-control")
 
 

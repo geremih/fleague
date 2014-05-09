@@ -29,9 +29,13 @@
       %p{:class => "alert alert-success" , :id => "alert-success"}
         - if notice 
           = notice
+        - if flash[:notice]
+          = flash[:notice]
       %p{:class=>"alert alert-danger" , :id => "alert-danger"}
         - if alert 
           = alert
+        - if flash[:alert]
+          = flash[:alert]
       = yield 
       #push
   .row#footer
