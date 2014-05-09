@@ -6,6 +6,12 @@ gem 'rails', '4.1.0'
 # Use sqlite3 as the database for Active Record
 group :development , :test do
   gem 'sqlite3'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
 end
 
 # Use SCSS for stylesheets
@@ -46,7 +52,7 @@ gem 'devise'
 gem 'haml'
 gem 'haml-rails'
 gem 'cancan'
-
+gem 'faker'
 
 group :production do
   gem 'pg'
