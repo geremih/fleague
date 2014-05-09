@@ -8,14 +8,19 @@
         %table.table
           %thead
             %tr
+              %th No
               %th Match
               %th Score
           %tbody
             - for team in @teams
               %tr 
                 %td
+                  = team.match_id
+                %td
                   %a{href: team_path(team)}
-                    = team.match_id
+                    = team.match.team1.name
+                    vs
+                    = team.match.team2.name
                 %td= team.score
     .col-lg-offset-1.col-lg-4
       = render "shared/leaderboard" , users: @users
@@ -26,9 +31,21 @@
         No matches are scheduled.
       - else 
         - for match in @upcoming_matches
-          %ul.list-group
-            %li.list-group-item.text-center
-              %a{href: new_match_team_path(match) }
-                = match.id
+          %table.table
+            %thead
+              %tr
+                %th No.
+                %th Match
 
+            
+            %tbody
+              %tr
+                %td 
+                  = match.id
+                %td
+                  %a{href: new_match_team_path(match) }
+                    = match.team1.name 
+                    vs
+                    = match.team2.name
+                    
     

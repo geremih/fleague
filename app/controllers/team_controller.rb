@@ -3,13 +3,11 @@ class TeamController < ApplicationController
 
   def create
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
-    #TODO: Check team length
-    #TODO: Check correct format of the input
     user =User.find(current_user.id)
     authorize! :create, Team
     
-    teams = self.user.where(match_id: params[:match_id].to_i)
-    if  teams
+    teams = current_user.teams.where(match_id: params[:match_id].to_i)
+    if not  teams.empty?
       teams.destory_all
     end
     team = Team.new( user_id: current_user.id , match_id: params[:match_id])
@@ -34,9 +32,6 @@ class TeamController < ApplicationController
   end
 
 
-    
-    
-
   def new
     match_id = params[:match_id]
     if not match_id or not Match.exists? match_id.to_i
@@ -55,6 +50,7 @@ class TeamController < ApplicationController
       @user_players = []
     end
     @remaining_players = @match.players - @user_players
+
   end
 
   def edit

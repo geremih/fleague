@@ -6,6 +6,11 @@
           Match 
           = @team.match_id
           Statistics
+        %h3.text-center
+          = @team.match.team1.name
+          vs 
+          = @team.match.team2.name
+
         %h5.pull-right
           Score
           = @team.score

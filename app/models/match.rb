@@ -15,5 +15,13 @@ class Match < ActiveRecord::Base
   def validate_team_size
     errors.add(:player, "Not enough players for match") if not players.size >= 11
   end
+  
+  def team1
+    LeagueTeam.find( self.team_one_id)
+  end
+
+  def team2
+     LeagueTeam.find( self.team_two_id)
+  end
 
 end

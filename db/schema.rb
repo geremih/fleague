@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508054523) do
+ActiveRecord::Schema.define(version: 20140509123018) do
+
+  create_table "league_teams", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
 
   create_table "matches", force: true do |t|
     t.boolean  "completed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "team_one_id"
+    t.integer  "team_two_id"
   end
 
   create_table "player_match_records", force: true do |t|
@@ -38,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140508054523) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "league_team_id"
   end
 
   add_index "players", ["name"], name: "index_players_on_name", unique: true

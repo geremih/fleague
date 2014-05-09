@@ -2,21 +2,15 @@ class MatchController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    player_ids = params[:team].split(",").collect{ |s| s.to_i }
-    #TODO: Check team length
-    #TODO: Check correct format of the input
     authorize! :create, Match
+    team1_id = params[:team1].to_i
+    team2_id = params[:team2].to_i
     match = Match.new
-    player_ids.each { |id|  match.players << Player.find(id) }
-    if match.save
-      flash[:notice] = "Success"
-      redirect_to match_index_url
-    else
-      flash[:alert]= "Unable to schedule match"
-      redirect_to new_match_url
-      
-
-    end
+    match.team_one_id = team1_id
+    match.team_two_id = team2_id
+    LeagueTeam.find(team1_id).players.each {|p| match.players << p  }
+    LeagueTeam.find(team2_id).players.each {|p| match.players << p  }
+    match.save
   end
 
   def new
