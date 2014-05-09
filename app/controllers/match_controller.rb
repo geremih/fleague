@@ -8,8 +8,15 @@ class MatchController < ApplicationController
     authorize! :create, Match
     match = Match.new
     player_ids.each { |id|  match.players << Player.find(id) }
-    match.save
+    if match.save
+      flash[:notice] = "Success"
+      redirect_to match_index_url
+    else
+      flash[:alert]= "Unable to schedule match"
+      redirect_to new_match_url
       
+
+    end
   end
 
   def new
@@ -34,7 +41,7 @@ class MatchController < ApplicationController
     end
     match.completed = true
     match.save
-    
+    redirect_to match_index_url
   end
   
   def index

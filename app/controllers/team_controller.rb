@@ -7,8 +7,10 @@ class TeamController < ApplicationController
     #TODO: Check correct format of the input
     user =User.find(current_user.id)
     authorize! :create, Team
-    if user.team_for_match_id params[:match_id]
-      user.team_for_match_id(params[:match_id]).destroy
+    
+    teams = self.user.where(match_id: params[:match_id].to_i)
+    if  teams
+      teams.destory_all
     end
     team = Team.new( user_id: current_user.id , match_id: params[:match_id])
     authorize! :create, team

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def team_for_match_id( match_id)
-    self.teams.select { |t| t.match_id == match_id}.first
+    self.teams.where( match_id: match_id).first
   end
     
 end
