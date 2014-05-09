@@ -19,7 +19,7 @@
                   %a{href:{}}
                     = current_user.score
                 %li
-                  %a{href: edit_user_registration_path}
+                  %a{href: user_path(current_user)}
                     = current_user.email
                 - if can? :update, Player
                   %li

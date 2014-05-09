@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :match , shallow: true do
     resources :team
   end
-  devise_for :users
-  resources :users do
+  devise_for :user
+  resources :user do
     resources :team
   end
 

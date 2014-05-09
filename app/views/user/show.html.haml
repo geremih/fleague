@@ -1,0 +1,14 @@
+.container
+  .row
+    .col-lg-4.col-lg-offset-4
+      .thumbnail
+        = gravatar_for current_user 
+        .caption.text-center
+          %h3
+            = current_user.email 
+            %h4
+            Score:
+            =  current_user.score
+          %p
+            = link_to "Edit Profile", edit_user_registration_path , class: "btn btn-primary"
+
