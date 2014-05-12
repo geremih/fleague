@@ -2,15 +2,14 @@ class TeamController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    authorize! :create, Team
+    team = Team.new( user_id: current_user.id , match_id: params[:match_id])
+    authorize! :create, team
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
     user =User.find(current_user.id)
     teams = current_user.teams.where(match_id: params[:match_id].to_i)
     if not  teams.empty?
       teams.destroy_all
     end
-    team = Team.new( user_id: current_user.id , match_id: params[:match_id])
-    authorize! :create, team
     team = user.teams.create
     player_ids.each { |id|  team.players << Player.find(id) }
     team.match_id = params[:match_id].to_i

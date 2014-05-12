@@ -6,10 +6,14 @@
           Match 
           = @team.match_id
           Statistics
+        %h4.text-center
+          = link_to  @team.user.email ,user_path(@team.user) 
+
         %h3.text-center
           = @team.match.team1.name
           vs 
           = @team.match.team2.name
+
 
         %h5.pull-right
           Score
