@@ -12,15 +12,15 @@ class MatchController < ApplicationController
       flash[:alert]= match.errors.inspect
     end
 
-    respond_to do |format|
-      if match.errors.empty?
-        format.html
-        format.js { render :json => {:status => :success}}
-      else
-        format.html
-        format.js { render :json => {:status => :error}}
-      end
+
+    if match.errors.empty?
+      flash[:notice] = "Match scheduled"
+      redirect_to match_index_path
+    else
+      flash[:alert] = "Couldn't schedule."
+      redirect_to new_match_path
     end
+
   end
 
   def new
