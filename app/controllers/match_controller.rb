@@ -6,10 +6,8 @@ class MatchController < ApplicationController
     team1_id = params[:team1].to_i
     team2_id = params[:team2].to_i
     match = Match.new
-    match.team_one_id = team1_id
-    match.team_two_id = team2_id
-    LeagueTeam.find(team1_id).players.each {|p| match.players << p  }
-    LeagueTeam.find(team2_id).players.each {|p| match.players << p  }
+    match.team1 = LeagueTeam.find(team1_id)
+    match.team2 = LeagueTeam.find(team2_id)
     if !match.save
       flash[:alert]= match.errors.inspect
     end

@@ -16,11 +16,35 @@ class Match < ActiveRecord::Base
   
   
   def team1
-    LeagueTeam.find( self.team_one_id)
+    if self.team_one_id
+      LeagueTeam.find( self.team_one_id)
+    end
   end
 
+  def team1=(team)
+    if self.team_one_id
+      raise "Can't replace team'"
+    else
+      self.team_one_id = team.id
+      team.players.each {|p| self.players << p  }
+    end
+    
+  end
+
+
   def team2
-     LeagueTeam.find( self.team_two_id)
+    if self.team_two_id
+      LeagueTeam.find( self.team_two_id)
+    end
+  end
+
+  def team2=(team)
+    if self.team_two_id
+      raise "Can't replace team'"
+    else
+      self.team_two_id = team.id
+      team.players.each {|p| self.players << p  }
+    end
   end
 
   def validate_teams_are_different

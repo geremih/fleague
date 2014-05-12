@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-  describe "GET /static_pages/dashboard" do
+  describe "GET /static_pages/dashboard" 1do
     it "works!" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       get dashboard_path
