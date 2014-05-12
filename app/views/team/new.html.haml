@@ -24,7 +24,7 @@
             %span.badge
               = player.score.round(2)
     .col-lg-2.text-center
-      = form_tag(match_team_index_path(params[:match_id]) , :id => "form"  , remote: true) do
+      = form_tag(match_team_index_path(params[:match_id]) , :id => "form" ) do
         = hidden_field_tag(:team, "" , id:"team") 
         = submit_tag("Update team"  , id:"update-team-button"  , class: "btn btn-default btn-primary btn-lg")
 

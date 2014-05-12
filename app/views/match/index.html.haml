@@ -3,6 +3,7 @@
     .col-lg-2.sidebar
       = render "shared/dashboard" , selection: :match_up
     .col-lg-10.col-lg-offset-2 
+      = render "shared/flash_divs"
       .col-lg-4.col-lg-offset-3
         %ul.list-group
           - for match in @matches

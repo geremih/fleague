@@ -1,5 +1,6 @@
 class MatchController < ApplicationController
   before_action :authenticate_user!
+  layout Proc.new{ ['index', 'new', 'edit'].include?(action_name) ? 'dashboard' : 'application' }
 
   def create
     authorize! :create, Match
@@ -11,8 +12,6 @@ class MatchController < ApplicationController
     if !match.save
       flash[:alert]= match.errors.inspect
     end
-
-
     if match.errors.empty?
       flash[:notice] = "Match scheduled"
       redirect_to match_index_path
@@ -51,7 +50,11 @@ class MatchController < ApplicationController
       @records << record
     end
     match.completed = true
-    match.save
+    if match.save
+      flash[:notice] = "Match updated"
+    else
+      flash[:alert] = "Some error occured, please try again"
+    end
     redirect_to match_index_url
   end
   
