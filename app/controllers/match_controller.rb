@@ -10,20 +10,26 @@ class MatchController < ApplicationController
     match.team_two_id = team2_id
     LeagueTeam.find(team1_id).players.each {|p| match.players << p  }
     LeagueTeam.find(team2_id).players.each {|p| match.players << p  }
-    match.save
+    if !match.save
+      render text: match.errors.inspect
+    end
+    
   end
 
   def new
+    authorize! :create, Match
     @remaining_players = Player.all
   end
 
   def edit
+    authorize! :update , Match
     @match = Match.find(params[:id])
     @players = @match.players
 
   end
   
   def update
+    authorize! :update , Match
     match = Match.find(params[:id])
     @scores = []
     @records = []
@@ -39,6 +45,7 @@ class MatchController < ApplicationController
   end
   
   def index
+    authorize! :update , Match
     @matches = Match.all
   end
   

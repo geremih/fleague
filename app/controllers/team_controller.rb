@@ -2,10 +2,9 @@ class TeamController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    authorize! :create, Team
     player_ids = params[:team].split(",").collect{ |s| s.to_i }
     user =User.find(current_user.id)
-    authorize! :create, Team
-    
     teams = current_user.teams.where(match_id: params[:match_id].to_i)
     if not  teams.empty?
       teams.destory_all
@@ -33,6 +32,7 @@ class TeamController < ApplicationController
 
 
   def new
+    authorize! :create, Team
     match_id = params[:match_id]
     if not match_id or not Match.exists? match_id.to_i
       redirect_to pages_home_path
@@ -57,6 +57,7 @@ class TeamController < ApplicationController
   end
 
   def show
+    authorize! :read , Team
     @team = Team.find(params[:id])
   end
 

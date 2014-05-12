@@ -34,6 +34,7 @@ class Ability
       can :manage, :all
     else
       can :manage , Team , :user_id => user.id
+      can :read , [Match , Team , Player, LeagueTeam ]
     end
   end
 end

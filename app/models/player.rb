@@ -7,7 +7,6 @@ class Player < ActiveRecord::Base
   has_many :matches , through:  :player_match_records
 
   validates :name, presence: true
-  
 
   
   def score
