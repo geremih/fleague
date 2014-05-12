@@ -54,7 +54,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'cancan'
 gem 'faker'
-
+gem 'kaminari'
 group :production do
   gem 'pg'
   gem 'rails_12factor'

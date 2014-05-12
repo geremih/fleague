@@ -1,6 +1,6 @@
 .container-fluid
-  .row
-    .col-lg-offset-1.col-lg-4
+  .col-lg-offset-1.col-lg-4
+    .row
       %h2 Match History
       - if @teams.empty?
         You haven't played a match yet!
@@ -22,10 +22,7 @@
                     vs
                     = team.match.team2.name
                 %td= team.score
-    .col-lg-offset-1.col-lg-4
-      = render "shared/leaderboard" , users: @users.take(10)
-  .row 
-    .col-lg-offset-1.col-lg-4
+    .row
       %h2 Upcoming matches
       - if @upcoming_matches.empty?
         No matches are scheduled.
@@ -46,4 +43,27 @@
                     vs
                     = match.team2.name
                     
+
+  .col-lg-offset-1.col-lg-4
+    .row
+      
+      %h2 Leaderboard
+
+
+
+      %table.table
+        %thead
+          %tr
+            %th Rank
+            %th Name
+            %th Score
+        %tbody#users
+          = render "shared/user" , users: @users
+
+      #paginator
+        = paginate @users, remote: true
+
+
+
+
     
