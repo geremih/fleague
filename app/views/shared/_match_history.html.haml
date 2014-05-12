@@ -1,0 +1,26 @@
+- if user.teams.empty?
+  - if user == current_user
+    You haven't played a match yet!
+  - else 
+    = user.email
+    hasn't played a match yet!
+- else
+  %table.table
+    %thead
+      %tr
+        %th ID
+        %th Match
+        %th Score
+    %tbody
+      - for team in user.teams
+        %tr 
+          %td
+            = team.match_id
+          %td
+            %a{href: team_path(team)}
+              = team.match.team1.name
+              vs
+              = team.match.team2.name
+          %td= team.score
+
+          

@@ -2,26 +2,7 @@
   .col-lg-offset-1.col-lg-4
     .row
       %h2 Match History
-      - if @teams.empty?
-        You haven't played a match yet!
-      - else
-        %table.table
-          %thead
-            %tr
-              %th No
-              %th Match
-              %th Score
-          %tbody
-            - for team in @teams
-              %tr 
-                %td
-                  = team.match_id
-                %td
-                  %a{href: team_path(team)}
-                    = team.match.team1.name
-                    vs
-                    = team.match.team2.name
-                %td= team.score
+      = render "shared/match_history" , user: current_user
     .row
       %h2 Upcoming matches
       - if @upcoming_matches.empty?
@@ -46,11 +27,7 @@
 
   .col-lg-offset-1.col-lg-4
     .row
-      
       %h2 Leaderboard
-
-
-
       %table.table
         %thead
           %tr
@@ -58,8 +35,7 @@
             %th Name
             %th Score
         %tbody#users
-          = render "shared/user" , users: @users
-
+          = render "shared/user" , users: @users , page: params[:page]
       #paginator
         = paginate @users, remote: true
 

@@ -1,5 +1,8 @@
 -  users.each_index do |i|
+  - page ||= 1
   %tr
-    %td= i+1
-    %td=  users[i].email
+    %td= (page.to_i - 1) * 10 +  i+1
+    %td
+      = link_to users[i].email , user_path(users[i])
+
     %td=  users[i].score

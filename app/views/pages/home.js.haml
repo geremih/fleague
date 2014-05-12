@@ -1,4 +1,4 @@
 $('#paginator').html("#{escape_javascript(paginate(@users, :remote => true)) }");
 
-$('#users').html("#{escape_javascript(render("shared/user" , users: @users))}");
+$('#users').html("#{escape_javascript(render("shared/user" , users: @users , page: params[:page]))}");
  

@@ -1,5 +1,4 @@
 .container-fluid
-
   .row
     .col-lg-4.col-lg-offset-4
       .row
@@ -13,7 +12,7 @@
           = @match.team2.name
       .row
         %ul.list-group
-          - for player in @match.players
+          - for player in @match.players.sort{ |a,b| b.score_in_match(@match.id) - a.score_in_match(@match.id)}
             %li.list-group-item
               = player.name
               %span.badge

@@ -3,9 +3,8 @@
     .col-lg-4.col-lg-offset-4
       .row
         %h2.text-center 
-          %a{href: match_path(@team.match)}
-            Match 
-            = @team.match_id
+          Match 
+          = @team.match_id
           Statistics
         %h3.text-center
           = @team.match.team1.name
@@ -17,10 +16,14 @@
           = @team.score
       .row
         %ul.list-group
-          - for player in @team.players
+          - for player in @team.players.sort{ |a,b| b.score_in_match(@team.match_id) - a.score_in_match(@team.match_id)}
             %li.list-group-item
               = player.name
               %span.badge
                 = player.score_in_match @team.match_id
 
+
+      .row.text-center
+        %a{href: match_path(@team.match)}
+          View complete statistics
 
