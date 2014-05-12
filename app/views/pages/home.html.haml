@@ -30,15 +30,13 @@
       - if @upcoming_matches.empty?
         No matches are scheduled.
       - else 
-        - for match in @upcoming_matches
-          %table.table
-            %thead
-              %tr
-                %th No.
-                %th Match
-
-            
-            %tbody
+        %table.table
+          %thead
+            %tr
+              %th No.
+              %th Match
+          %tbody
+            - for match in @upcoming_matches
               %tr
                 %td 
                   = match.id
