@@ -26,15 +26,12 @@
                     = link_to "Dashboard" , dashboard_path
                 %li
                   = link_to "Logout", destroy_user_session_path, method: :delete
-      %p{:class => "alert alert-success" , :id => "alert-success"}
-        - if notice 
-          = notice
-        - if flash[:notice]
+      
+      - if flash[:notice]
+        %p{:class => "alert alert-success" , :id => "alert-success"}
           = flash[:notice]
-      %p{:class=>"alert alert-danger" , :id => "alert-danger"}
-        - if alert 
-          = alert
-        - if flash[:alert]
+      - if flash[:alert]
+        %p{:class=>"alert alert-danger" , :id => "alert-danger"}
           = flash[:alert]
       = yield 
       #push

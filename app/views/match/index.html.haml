@@ -6,8 +6,10 @@
       .col-lg-4.col-lg-offset-3
         %ul.list-group
           - for match in @matches
-            %li.list-group-item{class: (match.completed ?  'list-group-item-success'  : 'list-group-item-danger')}
-              = link_to match.id , edit_match_path(match) 
+            %li.list-group-item{class: (match.completed ?  'list-group-item-success'  : 'list-group-item-warning')}
+              = match.id
+              = link_to "#{match.team1.name} vs #{match.team2.name}"  , edit_match_path(match) 
+              
               %span.badge
                 - if match.completed
                   Completed

@@ -20,7 +20,7 @@ class TeamController < ApplicationController
     end
 
     respond_to do |format|
-      if  team.errors.size == 0
+      if  team.errors.empty?
         format.html
         format.js { render :json => {:status => :success}}
       else

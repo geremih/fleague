@@ -11,9 +11,18 @@ class MatchController < ApplicationController
     LeagueTeam.find(team1_id).players.each {|p| match.players << p  }
     LeagueTeam.find(team2_id).players.each {|p| match.players << p  }
     if !match.save
-      render text: match.errors.inspect
+      flash[:alert]= match.errors.inspect
     end
-    
+
+    respond_to do |format|
+      if match.errors.empty?
+        format.html
+        format.js { render :json => {:status => :success}}
+      else
+        format.html
+        format.js { render :json => {:status => :error}}
+      end
+    end
   end
 
   def new
@@ -26,6 +35,10 @@ class MatchController < ApplicationController
     @match = Match.find(params[:id])
     @players = @match.players
 
+  end
+
+  def show
+    @match = Match.find(params[:id].to_i)
   end
   
   def update
