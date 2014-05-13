@@ -45,7 +45,7 @@ class MatchController < ApplicationController
     @records = []
     for player in  match.players
       record = PlayerMatchRecord.find_by match_id: match.id ,  player_id: player.id
-      record.score = params[player.id.to_s].to_i
+      record.score = params[player.id.to_s].to_i < 100 ? params[player.id.to_s].to_i : 100
       record.save
       @records << record
     end

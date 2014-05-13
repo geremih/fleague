@@ -213,3 +213,42 @@ team_list.each do |name , players|
     team.players.create( name: p ) 
     end
 end
+
+
+50.times{ User.create( email: Faker::Internet.email)}
+
+
+
+15.times do
+  match = Match.new
+  range = (1..LeagueTeam.count).to_a.shuffle
+  match.team1 = LeagueTeam.find(range[0])
+  match.team2 = LeagueTeam.find(range[1])
+  match.save
+
+  
+  5.times do
+    players =   match.players.shuffle.take(11)
+    user = User.find( (1..User.count).to_a.sample)
+    puts user.email
+    puts user.id
+    puts match.id
+    if  !user.teams.where(match_id: match.id).empty?
+      puts "exists"
+      next
+    end
+    team = user.teams.create
+    players.each { |p|  team.players << p }
+    team.match_id = match.id
+    team.save
+    user.save
+  end
+  
+  for player in match.players
+    record = PlayerMatchRecord.find_by match_id: match.id ,  player_id: player.id
+    record.score = (1..100).to_a.sample
+    record.save
+  end
+  match.completed = true
+  match.save
+end

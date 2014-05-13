@@ -1,4 +1,4 @@
-- if user.teams.empty?
+- if user.teams.select{ |t| t.match.completed }.empty?
   - if user == current_user
     You haven't played a match yet!
   - else 
@@ -12,7 +12,7 @@
         %th Match
         %th Score
     %tbody
-      - for team in user.teams
+      - for team in user.teams.select{ |t| t.match.completed }
         %tr 
           %td
             = team.match_id

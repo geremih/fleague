@@ -29,6 +29,6 @@
                     %td
                       = player.name
                     %td
-                      = text_field_tag( player.id , nil, class: "player-score-input form-control")
+                      = text_field_tag( player.id , nil, class: "player-score-input form-control" , type: "number" , min: 0 , max: 100)
 
 
