@@ -215,7 +215,7 @@ team_list.each do |name , players|
 end
 
 
-50.times{ User.create( email: Faker::Internet.email)}
+50.times{ User.create( email: Faker::Internet.email, password:"password" , password_confirmation: "password")}
 
 
 
@@ -229,7 +229,7 @@ end
   
   5.times do
     players =   match.players.shuffle.take(11)
-    user = User.find( (1..User.count).to_a.sample)
+    user = User.find((1..User.count).to_a.sample)
     puts user.email
     puts user.id
     puts match.id
